@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter_svg: ^1.1.1
+  carousel_slider: ^4.1.1
   flutter:
     sdk: flutter
 
