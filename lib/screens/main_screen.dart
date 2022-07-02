@@ -1,7 +1,8 @@
-import 'dart:js';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:js';
 
 class main_screen extends StatelessWidget{
   @override
@@ -24,17 +25,17 @@ class main_screen extends StatelessWidget{
         children: <Widget>[
         IconButton(
           iconSize: 40.0,
-          icon: SvgPicture.asset('assets/icons/iconoapple.jpg'),
+          icon: SvgPicture.asset('assets/icons/settings.jpg'),
           onPressed: (){},
         ),
           IconButton(
             iconSize: 40.0,
-            icon: SvgPicture.asset('assets/icons/iconoapple.jpg'),
+            icon: SvgPicture.asset('assets/icons/search.jpg'),
             onPressed: (){},
           ),
           IconButton(
             iconSize: 40.0,
-            icon: SvgPicture.asset('assets/icons/iconoapple.jpg'),
+            icon: SvgPicture.asset('assets/icons/slider.jpg'),
             onPressed: (){},
           ),
       ],

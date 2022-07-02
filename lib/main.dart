@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui/screens/Splashscreen.dart';
+import 'package:ui/screens/main_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'job finder',
-        home: Splashscreen(),
+        home: main_screen(),
         theme: ThemeData(
           primaryColor: Color(0xff5f5fff),
           accentColor: Color(0xffb70d2),
