@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:js';
+import 'package:js/js.dart';
+import 'package:ui/Models/jobcarrusel.dart';
 
 class main_screen extends StatelessWidget{
   @override
@@ -12,6 +13,8 @@ class main_screen extends StatelessWidget{
         child: ListView(
           children: <Widget>[
               _customappbar(),
+            foryou(context),
+
           ],
         )
       ),
@@ -25,17 +28,17 @@ class main_screen extends StatelessWidget{
         children: <Widget>[
         IconButton(
           iconSize: 40.0,
-          icon: SvgPicture.asset('assets/icons/settings.jpg'),
+          icon: SvgPicture.asset('assets/icons/settings.svg'),
           onPressed: (){},
         ),
           IconButton(
             iconSize: 40.0,
-            icon: SvgPicture.asset('assets/icons/search.jpg'),
+            icon: SvgPicture.asset('assets/icons/search.svg'),
             onPressed: (){},
           ),
           IconButton(
             iconSize: 40.0,
-            icon: SvgPicture.asset('assets/icons/slider.jpg'),
+            icon: SvgPicture.asset('assets/icons/slider.svg'),
             onPressed: (){},
           ),
       ],
@@ -53,7 +56,8 @@ class main_screen extends StatelessWidget{
             "for you",
               style: Theme.of(context).textTheme.bodyText1
           ),
-        )
+        ),
+        jobcarrusel(),
       ],
     );
   }
