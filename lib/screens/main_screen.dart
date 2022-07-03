@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:js/js.dart';
 import 'package:ui/Models/jobcarrusel.dart';
+import 'package:ui/screens/Splashscreen.dart';
 
 class main_screen extends StatelessWidget{
   @override
@@ -14,6 +15,7 @@ class main_screen extends StatelessWidget{
           children: <Widget>[
               _customappbar(),
             foryou(context),
+            Splashscreen(),
 
           ],
         )
