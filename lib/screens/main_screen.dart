@@ -56,13 +56,15 @@ class main_screen extends StatelessWidget{
           padding: EdgeInsets.only(left: 30.0),
           child: Text(
             "for you",
-              style: Theme.of(context).textTheme.bodyText1
+            style: TextStyle(fontFamily: 'Poppin',color: Colors.purple,fontSize: 30.0,fontWeight: FontWeight.bold),
           ),
         ),
         jobcarrusel(),
       ],
     );
   }
+
+
 }
 
 
