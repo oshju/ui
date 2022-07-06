@@ -54,10 +54,11 @@ Widget favicon(){
 
 Widget infotext(){
     return Column(
+      //
       //crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Google',
+          'Googles',
           style: TextStyle(fontFamily: 'Poppin',color: Colors.white,fontSize: 15.0,fontWeight: FontWeight.bold),
         ),
         Text(
