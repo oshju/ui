@@ -19,7 +19,7 @@ class Splashscreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline1
             ),
                 Text(
-                'Made easy money t',
+                'Made easy money tec',
                 style: Theme.of(context).textTheme.headline2
 
 
