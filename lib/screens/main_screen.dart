@@ -6,6 +6,23 @@ import 'package:js/js.dart';
 import 'package:ui/Models/jobcarrusel.dart';
 import 'package:ui/screens/Splashscreen.dart';
 
+import '../Models/job.dart';
+import '../Models/joblist.dart';
+import 'main_screen.dart';
+
+List<job> forYouJobs = [
+  job(
+    role: 'Product Designer',
+    location: 'San Francisco, CA',
+
+  ),
+  job(
+      role: 'Frontend Web',
+      location: 'Miami',
+
+  ),
+];
+
 class main_screen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -110,8 +127,33 @@ class main_screen extends StatelessWidget{
           ),
         ),
         jobcarrusel(),
-        textfooter(context)
+        textfooter(context),
+        //textfooter1(context),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: joblist(forYouJobs),
+        ),
       ],
+    );
+  }
+
+  Widget textfooter1(context){
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            'mathew wolff',
+            style: TextStyle(fontFamily: 'Poppin',color: Colors.purple,fontSize: 18.0,fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'Last movement',
+
+            style: TextStyle(fontFamily: 'Poppin',color: Colors.purple,fontSize: 15.0,fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 
