@@ -6,7 +6,7 @@ import 'package:ui/Models/job.dart';
 class joblist extends StatelessWidget{
   List<job> jobs;
   joblist(this.jobs);
-
+// List<job> jobs = [
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
