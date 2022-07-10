@@ -21,6 +21,16 @@ List<job> forYouJobs = [
       location: 'Miami',
 
   ),
+  job(
+    role: 'Frontend Web',
+    location: 'Miami',
+
+  ),
+  job(
+    role: 'Frontend Web',
+    location: 'Miami',
+
+  ),
 ];
 
 class main_screen extends StatelessWidget{
@@ -130,7 +140,7 @@ class main_screen extends StatelessWidget{
         textfooter(context),
         //textfooter1(context),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: joblist(forYouJobs),
         ),
       ],

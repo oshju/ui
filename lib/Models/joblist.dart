@@ -11,7 +11,7 @@ class joblist extends StatelessWidget{
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap:true,
-      physics:NeverScrollableScrollPhysics(),
+      physics: AlwaysScrollableScrollPhysics(),
       itemCount: this.jobs.length,
       itemBuilder: (context, index)=>compactitemjob(this.jobs[index]),
     );
