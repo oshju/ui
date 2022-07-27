@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:js/js.dart';
 import 'package:ui/Models/jobcarrusel.dart';
+import 'package:ui/animations/animatedcontainer.dart';
 import 'package:ui/screens/Splashscreen.dart';
+import 'package:ui/screens/apiprueba.dart';
+import 'package:ui/screens/pizza.dart';
 
 import '../Models/job.dart';
 import '../Models/joblist.dart';
@@ -40,7 +43,7 @@ class main_screen extends StatelessWidget{
       body: SafeArea(
         child: ListView(
           children: <Widget>[
-              _customappbar(),
+              _customappbar(context),
             textheader(context),
             foryou(context),
 
@@ -51,7 +54,7 @@ class main_screen extends StatelessWidget{
     );
   }
 
-  Widget _customappbar(){
+  Widget _customappbar(context){
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.0,vertical: 5.0),
       child: Row(
@@ -60,19 +63,36 @@ class main_screen extends StatelessWidget{
         IconButton(
           iconSize: 40.0,
           icon: SvgPicture.asset('assets/icons/slider.svg'),
-          onPressed: (){},
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Pizza()),
+              );
+            }
         ),
           Row(
             children: [
               IconButton(
                 iconSize: 40.0,
                 icon: SvgPicture.asset('assets/icons/search.svg'),
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ComunidadMadridData()),
+                  );
+                }
+
+
               ),
               IconButton(
                 iconSize: 40.0,
                 icon: SvgPicture.asset('assets/icons/settings.svg'),
-                onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Animation4() ),
+                    );
+                  }
               ),
             ],
           ),

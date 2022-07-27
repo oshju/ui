@@ -18,6 +18,7 @@ class item_job extends StatelessWidget {
                 _companylogo(),
                   favicon(),
 
+
                 ],
               ),
               infotext()
@@ -44,6 +45,9 @@ Widget _companylogo(){
       ),
     );
 }
+
+
+
 
 Widget favicon(){
     return Icon(
