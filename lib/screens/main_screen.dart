@@ -104,12 +104,12 @@ class main_screen extends StatelessWidget{
 
   Widget textheader(context){
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
             children: <Widget>[
               Text(
                   'hi jade',
-              style: Theme.of(context).textTheme.bodyText1
+                style: TextStyle(fontFamily: 'Poppin',color: Colors.cyan,fontSize: 30.0,fontWeight: FontWeight.bold),
             ),
               Text(
                   'find job',

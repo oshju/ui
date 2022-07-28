@@ -1,117 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-class MyApp extends StatelessWidget {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  AwesomeNotifications().initialize(
+      'resource://drawable/notification_icon',
+      [            // notification icon
+        NotificationChannel(
+          channelGroupKey: 'basic_test',
+          channelKey: 'basic',
+          channelName: 'Basic notifications',
+          channelDescription: 'Notification channel for basic tests',
+          channelShowBadge: true,
+          importance: NotificationImportance.High,
+        ),
+        //add more notification type with different configuration
+
+      ]
+  );
+
+  //click listiner on local notification
+  AwesomeNotifications().actionStream.listen((ReceivedNotification receivedNotification){
+    print(receivedNotification.payload!['title']);
+    //output from local notification click.
+  });
+
+  await Firebase.initializeApp(); //initilization of Firebase app
+  FirebaseMessaging.instance.subscribeToTopic("all"); //subscribe firebase message on topic
+
+  FirebaseMessaging.onBackgroundMessage(firebaseBackgroundMessage);
+  //background message listiner
+
+  runApp(hola());
+
+}
+
+// Declared as global, outside of any class
+Future<void> firebaseBackgroundMessage(RemoteMessage message) async {
+  AwesomeNotifications().createNotification(
+      content: NotificationContent( //with image from URL
+          id: 1,
+          channelKey: 'basic', //channel configuration key
+          title: message.data["title"],
+          body: message.data["body"],
+          bigPicture: message.data["image"],
+          notificationLayout: NotificationLayout.BigPicture,
+          payload: {"name":"flutter"}
+      )
+  );
+}
+
+class hola extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Notify',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
-      debugShowCheckedModeBanner: false,
-
+        home: Home()
     );
   }
 }
 
-class HomePage extends StatefulWidget {
+class Home extends  StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomePageState extends State {
-  late int _totalNotifications;
-  late final FirebaseMessaging _messaging;
-  void registerNotification() async {
-    // 1. Initialize the Firebase app
-    await Firebase.initializeApp();
-
-    // 2. Instantiate Firebase Messaging
-    _messaging = FirebaseMessaging.instance;
-
-    // 3. On iOS, this helps to take the user permissions
-    NotificationSettings settings = await _messaging.requestPermission(
-      alert: true,
-      badge: true,
-      provisional: false,
-      sound: true,
-    );
-
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission');
-      // TODO: handle the received notifications
-    } else {
-      print('User declined or has not accepted permission');
-    }
-  }
+class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    _totalNotifications = 0;
+    FirebaseMessaging.onMessage.listen(firebaseBackgroundMessage);
+    //active app listiner.
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Notify'),
-        brightness: Brightness.dark,
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'App for capturing Firebase Push Notifications',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-            ),
-          ),
-          SizedBox(height: 16.0),
-          NotificationBadge(totalNotifications: _totalNotifications),
-          SizedBox(height: 16.0),
-          // TODO: add the notification text here
-        ],
-      ),
+
     );
   }
-}
-
-class NotificationBadge extends StatelessWidget {
-  final int totalNotifications;
-
-  const NotificationBadge({required this.totalNotifications});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 40.0,
-      height: 40.0,
-      decoration: new BoxDecoration(
-        color: Colors.red,
-        shape: BoxShape.circle,
-      ),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            '$totalNotifications',
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-        ),
-      ),
-    );
-  }
-}
-class PushNotification {
-  PushNotification({
-    this.title,
-    this.body,
-  });
-  String? title;
-  String? body;
 }

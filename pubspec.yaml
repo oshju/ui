@@ -31,6 +31,11 @@ dependencies:
   flutter_svg: ^1.1.1
   carousel_slider: ^4.1.1
   js: ^0.6.2
+  flutter_lints: ^2.0.0
+  firebase_core: ^1.13.1
+  firebase_messaging: ^11.2.11
+  overlay_support: ^1.2.1
+  awesome_notifications: ^0.6.21
   flutter:
     sdk: flutter
 
@@ -48,10 +53,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
-  firebase_core: ^1.13.1
-  firebase_messaging: ^11.2.11
-  overlay_support: ^1.2.1
+
 
 
 # For information on the generic Dart part of this file, see the

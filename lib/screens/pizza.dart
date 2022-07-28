@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ui/animations/userprofile.dart';
 import 'package:ui/main.dart';
+import 'package:ui/screens/messaging.dart';
 
 import 'apiprueba.dart';
 
@@ -48,7 +49,7 @@ class Pizza extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MyApp()),
+                          builder: (context) => hola()),
                     );
                   }
 
