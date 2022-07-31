@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:ui/Models/job.dart';
 import 'package:ui/screens/main_screen.dart';
+
+import '../Models/joblist.dart';
 
 class user extends StatelessWidget {
   @override
@@ -67,8 +71,10 @@ class user extends StatelessWidget {
                       ),
                     ),
                   ]),
-                )
+                ),
+                joblistdos(),
               ],
+
             ),
             Align(
               alignment: Alignment.center,
@@ -100,6 +106,7 @@ class user extends StatelessWidget {
               ),
             ),
           ],
+
         ));
   }
 }
@@ -138,3 +145,77 @@ class ChoiceButton extends StatelessWidget {
     );
   }
 }
+
+
+class iconos extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          IconButton(
+              iconSize: 40.0,
+              icon: SvgPicture.asset('assets/icons/slider.svg'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => main_screen()),
+                );
+              }
+          ),
+          IconButton(
+              iconSize: 40.0,
+              icon: SvgPicture.asset('assets/icons/search.svg'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => main_screen()),
+                );
+              }
+          ),
+          IconButton(
+              iconSize: 40.0,
+              icon: SvgPicture.asset('assets/icons/settings.svg'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => main_screen()),
+                );
+              }
+          ),
+        ],
+      ),
+    );
+  }
+  }
+
+  class joblistdos extends StatelessWidget {
+
+
+    @override
+    Widget build(BuildContext context) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Mis trabajos',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            //joblist(this.jobs),
+          ],
+        ),
+      );
+    }
+  }
+
+
