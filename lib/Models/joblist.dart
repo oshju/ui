@@ -8,7 +8,7 @@ class joblist extends StatelessWidget{
 
   joblist(this.jobs);
 
-// List<job> jobs = [
+
 
   @override
   Widget build(BuildContext context) {

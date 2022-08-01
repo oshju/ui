@@ -6,6 +6,18 @@ import 'package:ui/screens/main_screen.dart';
 import '../Models/joblist.dart';
 
 class user extends StatelessWidget {
+  List<job> jobs = [
+    job(
+      role: 'Product Designer',
+      location: 'San Francisco, CA')];
+
+  //do a list of jobs
+  //List<job> jobs = [
+  //  job(
+  //    role: 'Product Designer',
+  //    location: 'San Francisco, CA',
+  //
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +85,7 @@ class user extends StatelessWidget {
                   ]),
                 ),
                 joblistdos(),
+                joblist(this.jobs)
               ],
 
             ),

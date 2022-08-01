@@ -32,19 +32,21 @@ class compactitemjob extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 7.0),
       child: Container(
         decoration: boxdecoration1(),
-        height: 150,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                  companylogo(),
 
-                  _infotext(),
-              ],
-            ),
-            favicon()
-          ],
+        child: SingleChildScrollView(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                    companylogo(),
+
+                    _infotext(),
+                ],
+              ),
+              favicon()
+            ],
+          ),
         ),
       ),
     );

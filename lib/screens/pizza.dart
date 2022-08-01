@@ -49,7 +49,7 @@ class Pizza extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => hola()),
+                          builder: (context) => user()),
                     );
                   }
 
