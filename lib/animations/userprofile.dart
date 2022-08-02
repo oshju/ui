@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ui/Models/job.dart';
+import 'package:ui/animations/userprofiledos.dart';
 import 'package:ui/screens/main_screen.dart';
 
 import '../Models/joblist.dart';
@@ -27,6 +28,7 @@ class user extends StatelessWidget {
         ),
         body: Stack(
           children: [
+            iconos(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -150,7 +152,7 @@ class ChoiceButton extends StatelessWidget {
           onPressed: (){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => main_screen() ),
+              MaterialPageRoute(builder: (context) => userdos() ),
             );
           },
         child: Icon(icon),
