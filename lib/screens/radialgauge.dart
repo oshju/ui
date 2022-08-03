@@ -7,7 +7,11 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 void main() {
   runApp(radialgauge());
-
+  var file=File('lib/screens/Datos.json');
+  var text=file.readAsStringSync();
+  var resBody = json.decode(text);
+   var data = resBody["values"];
+  return data.toString();
 
 }
 
@@ -68,21 +72,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String getSWData()  {
+  List? getSWData()  {
     var file=File('lib/screens/Datos.json');
     var text=file.readAsStringSync();
     var resBody = json.decode(text);
-    String data = resBody["values"];
-    return data.toString();
+    List? data = resBody["values"];
+    return data;
 
   }
-  int _counter = int.parse(getSWData());
+
+
+//obtener el valor en la pocicion 0
+  String getSWData1()  {
+    var file=File('lib/screens/Datos.json');
+    var text=file.readAsStringSync();
+    var resBody = json.decode(text);
+    List? data = resBody["values"];
+    return data[0].toString();
+
+  }
 
 
 
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
         child: Scaffold(
       body: Center(
@@ -95,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
           animationDuration: 4500,
           axes: <RadialAxis>[
             RadialAxis(minimum: 0, maximum: 150, pointers: <GaugePointer>[
-              NeedlePointer(value: data, enableAnimation: true)
+              NeedlePointer(value: data[0], enableAnimation: true)
             ], ranges: <GaugeRange>[
               GaugeRange(startValue: 0, endValue: 50, color: Colors.green),
               GaugeRange(startValue: 50, endValue: 100, color: Colors.orange),
@@ -128,3 +143,4 @@ class Launch{
 
   }
 }
+
