@@ -8,6 +8,7 @@ import 'package:ui/animations/animatedcontainer.dart';
 import 'package:ui/screens/Splashscreen.dart';
 import 'package:ui/screens/apiprueba.dart';
 import 'package:ui/screens/pizza.dart';
+import 'package:ui/screens/radialgauge.dart';
 
 import '../Models/job.dart';
 import '../Models/joblist.dart';
@@ -78,7 +79,7 @@ class main_screen extends StatelessWidget{
                 onPressed: (){
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ComunidadMadridData()),
+                    MaterialPageRoute(builder: (context) => radialgauge()),
                   );
                 }
 
