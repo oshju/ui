@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(radialgauge());
@@ -11,7 +12,7 @@ void main() {
   var text=file.readAsStringSync();
   var resBody = json.decode(text);
    var data = resBody["values"];
-  return data.toString();
+
 
 }
 
@@ -83,15 +84,37 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 //obtener el valor en la pocicion 0
-  String getSWData1()  {
+  String? getSWData1()  {
     var file=File('lib/screens/Datos.json');
     var text=file.readAsStringSync();
     var resBody = json.decode(text);
     List? data = resBody["values"];
-    return data[0].toString();
+    return data.toString();
 
   }
 
+  //cambia el valor a entero el valor en la pocicion 0 de data
+  double getSWData2()  {
+    var file=File('lib/screens/Datos.json');
+    var text=file.readAsStringSync();
+    var resBody = json.decode(text);
+    var data = resBody["values"];
+    return double.parse(data[0]);
+
+  }
+
+  final String url = "https://datos.madrid.es/egob/catalogo/200342-0-centros-dia.json";
+  late List data;
+
+  double getSWData5() async {
+    var res =
+    await http.get(Uri.parse(url), headers: {"Accept": "application/json"});
+
+
+    var resBody = json.decode(res.body);
+    data = resBody["values"];
+    return double.parse(data[0]);
+  }
 
 
 
@@ -110,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
           animationDuration: 4500,
           axes: <RadialAxis>[
             RadialAxis(minimum: 0, maximum: 150, pointers: <GaugePointer>[
-              NeedlePointer(value: data[0], enableAnimation: true)
+              NeedlePointer(value: getSWData5(), enableAnimation: true)
             ], ranges: <GaugeRange>[
               GaugeRange(startValue: 0, endValue: 50, color: Colors.green),
               GaugeRange(startValue: 50, endValue: 100, color: Colors.orange),
@@ -132,15 +155,4 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class Launch{
-  String? date;
-  int? values;
-
-
-  Launch.fromJson(Map<String, dynamic> json) {
-    date = json['id'];
-    values = json['values'];
-
-  }
-}
 
