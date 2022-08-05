@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:http/http.dart' as http;
 
@@ -94,10 +95,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   //cambia el valor a entero el valor en la pocicion 0 de data
-  double getSWData2()  {
-    var file=File('lib/screens/Datos.json');
-    var text=file.readAsStringSync();
-    var resBody = json.decode(text);
+  Future<double> getSWData2() async {
+    final String file = await rootBundle.loadString('assets/Datos.json') as String;
+    var resBody = json.decode(file);
     var data = resBody["values"];
     return double.parse(data[0]);
 
@@ -106,17 +106,31 @@ class _MyHomePageState extends State<MyHomePage> {
   final String url = "https://datos.madrid.es/egob/catalogo/200342-0-centros-dia.json";
   late List data;
 
-  double getSWData5() async {
-    var res =
-    await http.get(Uri.parse(url), headers: {"Accept": "application/json"});
 
-
-    var resBody = json.decode(res.body);
-    data = resBody["values"];
-    return double.parse(data[0]);
-  }
 
 //hola
+  double? getdata() {
+    String responseData =
+    '[{"id":1,"name":"Product #1"},{"id":2,"name":"Product #2"}]';
+
+    //final products = json.decode(responseData);
+
+
+      // Print the type of "products"
+
+
+      // Print the name of the second product in the list
+
+
+    String filePath = 'lib/screens/Datos.json';
+
+    new File(filePath).readAsString().then((String contents) {
+      var products = json.decode(filePath);
+      data=products["values"];
+      return double.parse(data[0]);
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
           animationDuration: 4500,
           axes: <RadialAxis>[
             RadialAxis(minimum: 0, maximum: 150, pointers: <GaugePointer>[
-              NeedlePointer(value: getSWData5(), enableAnimation: true)
+              NeedlePointer(value: getSWData2(), enableAnimation: true)
             ], ranges: <GaugeRange>[
               GaugeRange(startValue: 0, endValue: 50, color: Colors.green),
               GaugeRange(startValue: 50, endValue: 100, color: Colors.orange),
