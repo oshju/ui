@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:core';
 import 'dart:ffi';
 import 'dart:io';
 
@@ -9,12 +10,10 @@ import 'package:http/http.dart' as http;
 
 void main() {
   runApp(radialgauge());
-  var file=File('lib/screens/Datos.json');
-  var text=file.readAsStringSync();
-  var resBody = json.decode(text);
-   var data = resBody["values"];
-
-
+  const jsonData = '{ "name": "Pizza da Mario", "values": "32.9" }';
+// 2. decode the json
+  final parsedJson = jsonDecode(jsonData);
+  final score = parsedJson['name'][0]['values'] as double;
 }
 
 class radialgauge extends StatelessWidget {
@@ -22,13 +21,12 @@ class radialgauge extends StatelessWidget {
 
   late List data;
 
-  String getSWData1()  {
-    var file=File('lib/screens/Datos.json');
-    var text=file.readAsStringSync();
-      var resBody = json.decode(text);
-      data = resBody["values"];
+  String getSWData1() {
+    var file = File('lib/screens/Datos.json');
+    var text = file.readAsStringSync();
+    var resBody = json.decode(text);
+    data = resBody["values"];
     return data.toString();
-
   }
 
   @override
@@ -52,7 +50,6 @@ class radialgauge extends StatelessWidget {
   }
 
   void setState(Null Function() param0) {}
-
 }
 
 class MyHomePage extends StatefulWidget {
@@ -74,67 +71,69 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List? getSWData()  {
-    var file=File('lib/screens/Datos.json');
-    var text=file.readAsStringSync();
+  List? getSWData() {
+    var file = File('lib/screens/Datos.json');
+    var text = file.readAsStringSync();
     var resBody = json.decode(text);
     List? data = resBody["values"];
     return data;
-
   }
 
-
 //obtener el valor en la pocicion 0
-  String? getSWData1()  {
-    var file=File('lib/screens/Datos.json');
-    var text=file.readAsStringSync();
+  String? getSWData1() {
+    var file = File('lib/screens/Datos.json');
+    var text = file.readAsStringSync();
     var resBody = json.decode(text);
     List? data = resBody["values"];
     return data.toString();
-
   }
 
   //cambia el valor a entero el valor en la pocicion 0 de data
   Future<double> getSWData2() async {
-    final String file = await rootBundle.loadString('assets/Datos.json') as String;
+    final String file =
+        await rootBundle.loadString('assets/Datos.json') as String;
     var resBody = json.decode(file);
     var data = resBody["values"];
     return double.parse(data[0]);
-
   }
 
-  final String url = "https://datos.madrid.es/egob/catalogo/200342-0-centros-dia.json";
+  final String url =
+      "https://datos.madrid.es/egob/catalogo/200342-0-centros-dia.json";
   late List data;
 
-
+  get score => null;
 
 //hola
   double? getdata() {
     String responseData =
-    '[{"id":1,"name":"Product #1"},{"id":2,"name":"Product #2"}]';
+        '[{"id":1,"name":"Product #1"},{"id":2,"name":"Product #2"}]';
 
     //final products = json.decode(responseData);
 
+    // Print the type of "products"
 
-      // Print the type of "products"
-
-
-      // Print the name of the second product in the list
-
+    // Print the name of the second product in the list
 
     String filePath = 'lib/screens/Datos.json';
 
     new File(filePath).readAsString().then((String contents) {
       var products = json.decode(filePath);
-      data=products["values"];
+      data = products["values"];
       return double.parse(data[0]);
     });
-
   }
+
+  double sabado() {
+    const jsonData = '{ "name": "Pizza da Mario", "values": 32.9 }';
+// 2. decode the json
+    final parsedJson = jsonDecode(jsonData);
+    final score = parsedJson['values'] as double;
+    return score;
+  }
+
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
         child: Scaffold(
       body: Center(
@@ -147,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
           animationDuration: 4500,
           axes: <RadialAxis>[
             RadialAxis(minimum: 0, maximum: 150, pointers: <GaugePointer>[
-              NeedlePointer(value: getSWData2(), enableAnimation: true)
+              NeedlePointer(value: sabado(), enableAnimation: true)
             ], ranges: <GaugeRange>[
               GaugeRange(startValue: 0, endValue: 50, color: Colors.green),
               GaugeRange(startValue: 50, endValue: 100, color: Colors.orange),
@@ -169,4 +168,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class jsonData {
+  final String name;
+  final double values;
 
+  jsonData({required this.name, required this.values});
+}
+//TODO
+//String toString() => sabado().toString();
