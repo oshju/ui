@@ -130,7 +130,17 @@ class _MyHomePageState extends State<MyHomePage> {
     final score = parsedJson['values'] as double;
     return score;
   }
+
+  String sabado2() {
+    const jsonData = '{ "name": "Pizza da Mario", "values": 32.9 }';
+// 2. decode the json
+    final parsedJson = jsonDecode(jsonData);
+    final score = parsedJson['values'] as double;
+    String conver=score.toString();
+    return conver;
+  }
 //hola
+
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ], annotations: <GaugeAnnotation>[
               GaugeAnnotation(
                   widget: Text(
-                    '90.0 MPH',
+                    sabado2(),
                     style:
                         TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
