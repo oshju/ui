@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ui/Models/job.dart';
+import 'package:ui/animations/dosperfiles.dart';
 import 'package:ui/screens/main_screen.dart';
 
 import '../Models/joblist.dart';
@@ -168,7 +169,7 @@ class ChoiceButton extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => main_screen()),
+            MaterialPageRoute(builder: (context) => dosperdiles()),
           );
         },
         child: Icon(icon),
