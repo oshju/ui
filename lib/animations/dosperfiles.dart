@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ui/screens/jueves%20.dart';
 
 import 'animatedcontainer.dart';
 
@@ -28,8 +29,14 @@ Widget _customappbar(context) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
+          iconSize: 40.0,
+          icon: SvgPicture.asset('assets/icons/search.svg'),
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => jueves()),
+            );
+          },
         ),
         Expanded(
           child: Text('Jobs'),
