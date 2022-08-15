@@ -17,7 +17,7 @@ class _MyAppState extends State<login> {
 
       children: <Widget>[
         appbar(context),
-        Text('Login'),
+        fotofit(),
         body(context),
 
       ],
@@ -32,6 +32,13 @@ class _MyAppState extends State<login> {
       title: Text('Login'),
       centerTitle: true,
       backgroundColor: Colors.blueAccent,
+    );
+  }
+  
+  Widget fotofit() {
+    return Container(
+      child: Image.network('https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png',width: 230.0,
+        height: 80.0,)
     );
   }
 
