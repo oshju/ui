@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ui/animations/flight.dart';
+import 'package:ui/animations/oauth.dart';
 import 'package:ui/screens/login.dart';
 import 'package:ui/screens/main_screen.dart';
 
@@ -58,7 +59,7 @@ Widget _appbar(context) {
             onPressed: (){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => login()),
+                MaterialPageRoute(builder: (context) => oauth()),
               );
             },
         ),
