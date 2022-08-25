@@ -36,7 +36,6 @@ class oauth extends StatelessWidget {
     return await client;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,6 +166,43 @@ Widget body(BuildContext context) {
                 textColor: Colors.white,
                 elevation: 7.0,
                 onPressed: () {
+                  final uri = Uri.parse('https://api.github.com/user/repos');
+                  OAuth2Client client = GitHubOAuth2Client(
+                      //Corresponds to the android:scheme attribute
+                      customUriScheme: 'my.app',
+                      //The scheme must match the customUriScheme parameter!
+                      redirectUri: 'my.app://oauth2redirect');
+
+//Require an Access Token with the Authorization Code grant
+                  Future<AccessTokenResponse> getAccessToken() async {
+                    AccessTokenResponse tknResp = await client
+                        .getTokenWithAuthCodeFlow(
+                            clientId: 'aa1679bcf9aa628835c2',
+                            clientSecret:
+                                '458109f4c276028475c40e09aa4d5755b258fe53',
+                            scopes: ['repo']);
+
+                    return tknResp;
+                  }
+
+//From now on you can perform authenticated HTTP requests
+                  Future<OAuth2Client> getUserInfo() async {
+                    var httpClient = http.Client();
+                    http.Response resp = await httpClient
+                        .get(uri, headers: {'Authorization': 'Bearer '+getAccessToken().toString()});
+                    if(resp.statusCode == 200){
+                      print(resp.body);
+                    }
+                    else{
+                      print(resp.statusCode);
+                    }
+                    print(resp.body);
+                    AccessTokenResponse tknResp = await getAccessToken();
+                    OAuth2Client client = GitHubOAuth2Client(
+                        customUriScheme: 'my.app',
+                        redirectUri: 'my.app://oauth2redirect');
+                    return await client;
+                  }
                   //TODO: Implementar LOS METODOS DE AUTENTICACION
                   //oauth.getAccessToken();
                   //oauth.getUserInfo();
