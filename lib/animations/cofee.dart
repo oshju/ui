@@ -1,5 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ui/Models/item_job.dart';
 import 'package:ui/animations/listtile.dart';
 import 'package:ui/animations/oauth.dart';
 
@@ -12,7 +14,7 @@ class cofee extends StatelessWidget {
         children: <Widget>[
           _appbar(context),
           texto(),
-          listvi(context)
+          test(context)
         ],
       ),
 
@@ -30,7 +32,7 @@ Widget _appbar(context) {
             icon: SvgPicture.asset('assets/icons/search.svg'),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => oauth()));
+                  context, MaterialPageRoute(builder: (context) => listile(context)));
             }),
         IconButton(
             iconSize: 40.0,
@@ -62,16 +64,16 @@ Widget texto() {
 }
 
 Widget listvi(context) {
-  return SizedBox(
+  return Container(
     child: Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          listile(),
-        ]
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            listile(context),
+          ]
+        ),
       ),
-    ),
   );
 }
 
@@ -92,5 +94,23 @@ Widget theme(){
       ],
     ),
 
+  );
+}
+
+Widget test(context){
+  return CarouselSlider(
+    options: CarouselOptions(
+      height: 200.0,
+      autoPlay: true,
+      autoPlayInterval: Duration(seconds: 3),
+      autoPlayAnimationDuration: Duration(milliseconds: 800),
+      autoPlayCurve: Curves.fastOutSlowIn,
+      enlargeCenterPage: true,
+      scrollDirection: Axis.horizontal,
+    ), items: <Widget>[
+    item_job(),
+    item_job(),
+    item_job(),
+  ]
   );
 }

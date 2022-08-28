@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:ui/animations/oauth.dart';
 
 class listile extends StatelessWidget {
+  listile(context);
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:const EdgeInsets.all(8.0),
+    return Scaffold(
+      body: SafeArea(
+
       child: Container(
         width: 200.0,
-        color: Colors.grey,
+        height: 200.0,
+        color: Colors.blue,
       ),
 
+    ),
     );
   }
 }
