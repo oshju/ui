@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ui/Models/item_job.dart';
+import 'package:ui/animations/example.dart';
 import 'package:ui/animations/listtile.dart';
 import 'package:ui/animations/oauth.dart';
 
@@ -14,7 +15,8 @@ class cofee extends StatelessWidget {
         children: <Widget>[
           _appbar(context),
           texto(),
-          test(context)
+          test(context),
+          contenedor(context),sizebox()
         ],
       ),
 
@@ -39,7 +41,7 @@ Widget _appbar(context) {
             icon: SvgPicture.asset('assets/icons/search.svg'),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => oauth()));
+                  context, MaterialPageRoute(builder: (context) => spotify()));
             }),
         IconButton(
             iconSize: 40.0,
@@ -112,5 +114,69 @@ Widget test(context){
     item_job(),
     item_job(),
   ]
+  );
+}
+
+Widget contenedor(context){
+  return Padding(
+    padding: const EdgeInsets.all(18.0),
+    child: Container(
+      decoration: _boxdecoration(context),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 20.0,
+          ),
+          Icon(Icons.search_sharp),
+        ],
+      ),
+    ),
+  );
+}
+
+BoxDecoration _boxdecoration(context){
+  return BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(20.0),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black12,
+        blurRadius: 10.0,
+        spreadRadius: 2.0,
+        offset: Offset(
+          10.0,
+          10.0,
+        ),
+      )
+    ],
+  );
+}
+
+Widget sizebox(){
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        SizedBox(
+          width: 20.0,
+        ),
+        Text('Aasgard',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.blue,
+          ),
+          padding: EdgeInsets.all(12.0),
+          child: Icon(Icons.sentiment_satisfied_alt,
+          color: Colors.white,),
+        ),
+      ],
+    ),
   );
 }

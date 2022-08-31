@@ -1,0 +1,6 @@
+
+client id=9a5ca2dbd3d84250aacbde63de954f16
+
+secret client=10c173438bcf47fdb7a870417fc33dc6
+
+redirect uri=https://localhost
