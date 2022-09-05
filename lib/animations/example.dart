@@ -212,11 +212,13 @@ Widget iconos() {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         IconButton(
+            color: Colors.white,
             iconSize: 40.0,
             icon: SvgPicture.asset('assets/icons/search.svg'),
             onPressed: () {}),
         Text("Zinedine Zidane", style: TextStyle(fontSize: 20.0)),
         IconButton(
+            color: Colors.grey,
             iconSize: 40.0,
             icon: Icon(Icons.favorite_border),
             onPressed: () {

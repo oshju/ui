@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ui/animations/reactnative.dart';
 import 'package:ui/screens/Splashscreen.dart';
+import 'package:ui/screens/boxlunes.dart';
 import 'package:ui/screens/main_screen.dart';
 
 void main() {
