@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui/animations/reactnative.dart';
+import 'package:ui/animations/segundapantalla.dart';
+import 'package:ui/animations/twitch.dart';
 import 'package:ui/screens/Splashscreen.dart';
 import 'package:ui/screens/boxlunes.dart';
 import 'package:ui/screens/main_screen.dart';
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'job finder',
-        home: reactnative(),
+        home: main_screen(),
         theme: ThemeData(
           primaryColor: Color(0xff5f5fff),
           accentColor: Color(0xffb70d2),
