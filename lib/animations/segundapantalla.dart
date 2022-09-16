@@ -8,6 +8,7 @@ import 'package:oauth2_client/spotify_oauth2_client.dart';
 
 
 
+
 class lodeo extends StatelessWidget{
 
 Future<void> fetchFiles() async {
@@ -18,7 +19,7 @@ Future<void> fetchFiles() async {
   var tknResp = await client.getTokenWithAuthCodeFlow(
       clientId: '9a5ca2dbd3d84250aacbde63de954f16',
       scopes: [
-      'user-read-private',
+      'user-read-email',
       ]);
   //var json=jsonDecode(tknResp.body);
 
@@ -52,19 +53,21 @@ Widget boton(){
 
 Future<void> fetchFiles() async {
   var client = SpotifyOAuth2Client(
-      redirectUri: 'app://blackhole/auth ',
-      customUriScheme: 'app://blackhole/auth ');
+      redirectUri: 'com.example.ui://callback',
+      customUriScheme: 'com.example.ui');
 
   var tknResp = await client.getTokenWithAuthCodeFlow(
       clientId: '9a5ca2dbd3d84250aacbde63de954f16',
       scopes: [
-        'user-read-private',
+        'user-read-email','user-read-private',
       ]);
-  //var json=jsonDecode(tknResp.body);
+  //var json=await jsonDecode(tknResp.toString());
+  //print(json);
 
   print(tknResp.httpStatusCode);
   print(tknResp.error);
   print(tknResp.expirationDate);
-  print(tknResp.scope);
+  print(tknResp.scope.toString());
+  print(tknResp.accessToken);
 }
 

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'job finder',
-        home: main_screen(),
+        home: lodeo(),
         theme: ThemeData(
           primaryColor: Color(0xff5f5fff),
           accentColor: Color(0xffb70d2),
