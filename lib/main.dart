@@ -4,6 +4,7 @@ import 'package:ui/animations/segundapantalla.dart';
 import 'package:ui/animations/twitch.dart';
 import 'package:ui/screens/Splashscreen.dart';
 import 'package:ui/screens/boxlunes.dart';
+import 'package:ui/screens/cards.dart';
 import 'package:ui/screens/main_screen.dart';
 
 void main() {
