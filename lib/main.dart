@@ -6,6 +6,7 @@ import 'package:ui/screens/Splashscreen.dart';
 import 'package:ui/screens/boxlunes.dart';
 import 'package:ui/screens/cards.dart';
 import 'package:ui/screens/main_screen.dart';
+import 'package:ui/screens/sabadoprueba.dart';
 
 void main() {
   runApp(MyApp());
