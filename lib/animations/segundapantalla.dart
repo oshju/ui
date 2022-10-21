@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:oauth2_client/authorization_response.dart';
 import 'package:oauth2_client/oauth2_client.dart';
 import 'package:oauth2_client/oauth2_helper.dart';
 import 'package:oauth2_client/google_oauth2_client.dart';
@@ -84,6 +85,7 @@ Widget contendio() {
           child: Text('post'),
           onPressed: () {
             Future<void> fetchFiles1() async {
+              String url = 'https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks';
               var client = SpotifyOAuth2Client(
                   redirectUri: 'com.example.ui://callback',
                   customUriScheme: 'com.example.ui');
@@ -94,30 +96,29 @@ Widget contendio() {
                     'user-read-email',
                     'user-read-private',
                   ]);
-              if (tknResp!= null) {
-                var url =
-                await http.get(Uri.https('api.spotify.com', '/v1/playlists/)', {
-                  'headers': {
-                    'Authorization': 'Bearer ${tknResp.accessToken}',
-                    'Content-Type': 'application/json',
-                    'state': '34fFs29kd09',
-                  },
-                  'body': {
-                    'scope': 'read-playlist-private',
-                  },
-                }));
-                print(url);
-              } else {
-                print('error');
-                print(tknResp.errorDescription);
-                print(tknResp.errorUri);
-              }
 
+              if (tknResp != null) {
+                var headers = {
+                  'Authorization': 'Bearer ${tknResp.accessToken}',
+                };
+                var request = http.Request('GET', Uri.parse(
+                    'https://api.spotify.com/v1/browse/new-releases'));
+
+                request.headers.addAll(headers);
+
+                http.StreamedResponse response = await request.send();
+
+                if (response.statusCode == 200) {
+                  print(await response.stream.bytesToString());
+                }
+                else {
+                  print(response.reasonPhrase);
+                }
+              }
 
             }
             fetchFiles1();
-          },
-        ),
+          }),
       ],
     ),
     ],
@@ -143,4 +144,9 @@ Future<void> fetchFiles() async {
   print(tknResp.expirationDate);
   print(tknResp.scope.toString());
   print(tknResp.accessToken);
+  print(tknResp.refreshToken);
+  print(tknResp.tokenType);
+  print(tknResp.errorDescription);
+  print(tknResp.errorUri);
+
 }
