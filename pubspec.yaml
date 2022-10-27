@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  freezed: ^2.2.0
   http: ^0.13.4
   flutter_svg: ^1.1.1
   carousel_slider: ^4.1.1
