@@ -38,22 +38,99 @@ class _WeatherPageState extends State<lodeo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-          future: getData(),
-          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    title: Text(snapshot.data[index].title),
-                  );
-                },
-              );
-            }
-            return Center(child: CircularProgressIndicator());
-          }),
+        body: FutureBuilder(
+        builder: (ctx, snapshot) {
+      if (snapshot.connectionState == ConnectionState.done) {
+        // If error occured
+        if (snapshot.hasError) {
+          return Center(
+            child: Text(
+              '${snapshot.error.toString()} occurred',
+              style: TextStyle(fontSize: 18),
+            ),
+          );
+
+          // if data has no errors
+        } else if (snapshot.hasData) {
+          // Extracting data from snapshot object
+          final data = snapshot.data as Item;
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment(0.8, 1),
+                colors: <Color>[
+                  Color.fromARGB(255, 65, 89, 224),
+                  Color.fromARGB(255, 83, 92, 215),
+                  Color.fromARGB(255, 86, 88, 177),
+                  Color(0xfff39060),
+                  Color(0xffffb56b),
+                ],
+                tileMode: TileMode.mirror,
+              ),
+            ),
+            width: double.infinity,
+            height: double.infinity,
+            child: SafeArea(
+              child: Column(
+                children: [
+
+
+
+
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          data.albumType.toString(),
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+
+                        Text(
+                          data.id.toString(),
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+
+                        Text(
+                          data.name.toString(),
+                          style: TextStyle(
+                              fontSize: 50,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+      } else if (snapshot.connectionState == ConnectionState.waiting) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      } else {
+        return Center(
+          child: Text("${snapshot.connectionState} occured"),
+        );
+      }
+      return Center(
+        child: Text("Server timed out!"),
+      );
+    },
+    future: _myData!,
+    ),
     );
+
   }
 
   Widget boton() {
