@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -8,11 +7,9 @@ import 'package:ui/Models/segundapantalla.dart';
 import 'newmodel.dart';
 
 class callttoappi {
-
-
-
   Future getatatodapi() async {
-    String url = 'https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks';
+    String url =
+        'https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks';
     var client = SpotifyOAuth2Client(
         redirectUri: 'com.example.ui://callback',
         customUriScheme: 'com.example.ui');
@@ -27,27 +24,40 @@ class callttoappi {
     if (tknResp != null) {
       var headers = {
         'Authorization': 'Bearer ${tknResp.accessToken}',
+          'Content-Type': 'application/json',
+          'Charset': 'utf-8'
+
       };
-      var request = await http.Request('GET', Uri.parse(
-          'https://api.spotify.com/v1/browse/new-releases'));
 
-      request.headers.addAll(headers);
+      Map<String, String> headers1 = {
+        'Authorization': 'Bearer ${tknResp.accessToken}',
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Charset': 'utf-8'
+      };
 
-      http.StreamedResponse response = await request.send().timeout(
-          const Duration(seconds: 20));
+      var request = await http.Request(
+          'GET', Uri.parse('https://api.spotify.com/v1/browse/new-releases'));
+
+      request.headers.addAll(headers1);
+
+
+      http.StreamedResponse response =
+          await request.send().timeout(const Duration(seconds: 20));
 
       if (response.statusCode == 200) {
-        final reponsedata = await response.stream.bytesToString();
-        print(await response.stream.bytesToString());
-        var json = jsonDecode(await response.stream.bytesToString());
+        //String reponsedata = await response.stream.bytesToString();
+        //print(await response.stream.bytesToString());
+        Map<String, dynamic> userMap = jsonDecode(await response.stream.bytesToString());
+        Item user = Item.fromJson(userMap);
+        print(userMap);
+        //Map<String,dynamic> json = jsonDecode(await response.stream.bytesToString());
+        //print(json);
+        return Item.fromJson(userMap);
 
-      }
-      else {
+
+      } else {
         print(response.reasonPhrase);
       }
-      return Item.fromJson(jsonDecode(reponsedata));
     }
   }
-
-
 }

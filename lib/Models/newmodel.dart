@@ -54,7 +54,7 @@ class Albums {
 
   Map<String, dynamic> toJson() => {
     "href": href,
-    "items": List<Item>.from(items.map((x) => x?.toJson())),
+    "items": List<Item>.from(items.map((x) => x.toJson())),
     "limit": limit,
     "next": next,
     "offset": offset,
@@ -119,12 +119,12 @@ class Item {
 
   Map<String, dynamic> toJson() => {
     "album_type": albumType,
-    "artists": List<Artist>.from(artists.map((x) => x?.toJson())),
+    "artists": List<Artist>.from(artists.map((x) => x.toJson())),
     "available_markets": List<String>.from(availableMarkets.map((x) => x)),
     "external_urls": externalUrls?.toJson(),
     "href": href,
     "id": id,
-    "images": List<Image>.from(images.map((x) => x?.toJson())),
+    "images": List<Image>.from(images.map((x) => x.toJson())),
     "name": name,
     //"release_date": "${releaseDate.year.toString().padLeft(4'0')}-${releaseDate.month.toString().padLeft(2'0')}-${releaseDate.day.toString().padLeft(2'0')}",
     "release_date_precision": releaseDatePrecision,
