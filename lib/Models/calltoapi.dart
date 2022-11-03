@@ -48,11 +48,14 @@ class callttoappi {
         //String reponsedata = await response.stream.bytesToString();
         //print(await response.stream.bytesToString());
         Map<String, dynamic> userMap = jsonDecode(await response.stream.bytesToString());
-        Item user = Item.fromJson(userMap);
+        List<Item>nuevolista= [];
+        nuevolista = (userMap['albums']['items'] as List).map((e) => Item.fromJson(e)).toList();
+        //nuevolista.add(userMap);
+        //Item user = Item.fromJson(userMap);
         print(userMap);
         //Map<String,dynamic> json = jsonDecode(await response.stream.bytesToString());
         //print(json);
-        return Item.fromJson(userMap);
+        return nuevolista;
 
 
       } else {
