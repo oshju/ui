@@ -22,7 +22,7 @@ class _WeatherPageState extends State<lodeo> {
     return await callttoappi().getatatodapi();
   }
 
-
+  // Future getdata() async {
   Future<dynamic>? _myData;
 
   @override

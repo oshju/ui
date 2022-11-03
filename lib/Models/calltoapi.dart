@@ -45,17 +45,12 @@ class callttoappi {
           await request.send().timeout(const Duration(seconds: 20));
 
       if (response.statusCode == 200) {
-        //String reponsedata = await response.stream.bytesToString();
-        //print(await response.stream.bytesToString());
         Map<String, dynamic> userMap = jsonDecode(await response.stream.bytesToString());
-        List<Item>nuevolista= [];
-        nuevolista = (userMap['albums']['items'] as List).map((e) => Item.fromJson(e)).toList();
-        //nuevolista.add(userMap);
-        //Item user = Item.fromJson(userMap);
+        Item user = Item.fromJson(userMap);
         print(userMap);
         //Map<String,dynamic> json = jsonDecode(await response.stream.bytesToString());
         //print(json);
-        return nuevolista;
+        return Item.fromJson(userMap);
 
 
       } else {
