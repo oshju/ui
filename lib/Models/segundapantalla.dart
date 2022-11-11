@@ -13,124 +13,100 @@ import 'package:http/http.dart' as http;
 import 'newapi.dart';
 import 'newmodel.dart';
 
-class lodeo extends StatefulWidget {
-  @override
-  State<lodeo> createState() => _WeatherPageState();
-}
-class _WeatherPageState extends State<lodeo> {
-  Future getData() async {
-    return await callttoappi().getatatodapi();
-  }
-
-  // Future getdata() async {
-  Future<dynamic>? _myData;
-
-  @override
-  void initState() {
-    setState(() {
-      _myData = getData();
-    });
-
-    super.initState();
-  }
-
-
+class lodeo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder(
+      body: FutureBuilder(
+        future: getData(),
         builder: (ctx, snapshot) {
-      if (snapshot.connectionState == ConnectionState.done) {
-        // If error occured
-        if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              '${snapshot.error.toString()} occurred',
-              style: TextStyle(fontSize: 18),
-            ),
-          );
+          if (snapshot.connectionState == ConnectionState.done) {
+            // If error occured
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                  '${snapshot.error.toString()} occurred',
+                  style: TextStyle(fontSize: 18),
+                ),
+              );
 
-          // if data has no errors
-        } else if (snapshot.hasData) {
-          // Extracting data from snapshot object
-          final data = snapshot.data as Item;
-          return Container(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment(0.8, 1),
-                colors: <Color>[
-                  Color.fromARGB(255, 65, 89, 224),
-                  Color.fromARGB(255, 83, 92, 215),
-                  Color.fromARGB(255, 86, 88, 177),
-                  Color(0xfff39060),
-                  Color(0xffffb56b),
-                ],
-                tileMode: TileMode.mirror,
-              ),
-            ),
-            width: double.infinity,
-            height: double.infinity,
-            child: SafeArea(
-              child: Column(
-                children: [
-
-
-
-
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          data.albumType.toString(),
-                          style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-
-                        Text(
-                          data.id.toString(),
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-
-                        Text(
-                          data.name.toString(),
-                          style: TextStyle(
-                              fontSize: 50,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+              // if data has no errors
+            } else if (snapshot.hasData) {
+              // Extracting data from snapshot object
+              List<Item> data = snapshot.data as List<Item>;
+              return Container(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment(0.8, 1),
+                    colors: <Color>[
+                      Color.fromARGB(255, 65, 89, 224),
+                      Color.fromARGB(255, 83, 92, 215),
+                      Color.fromARGB(255, 86, 88, 177),
+                      Color(0xfff39060),
+                      Color(0xffffb56b),
+                    ],
+                    tileMode: TileMode.mirror,
                   ),
-                ],
-              ),
-            ),
-          );
-        }
-      } else if (snapshot.connectionState == ConnectionState.waiting) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      } else {
-        return Center(
-          child: Text("${snapshot.connectionState} occured"),
-        );
-      }
-      return Center(
-        child: Text("Server timed out!"),
-      );
-    },
-    future: _myData!,
-    ),
-    );
+                ),
+                width: double.infinity,
+                height: double.infinity,
+                child: SafeArea(
+                  child: Column(
+                    children: [
 
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Welcome ${data[2].artists[0].name}',
+
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              //obtain the data from the api
+                              //f,
+                                'Welcome ${data[2].name}',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              'Welcome ${data[2].artists[0].name}',
+                              style: TextStyle(
+                                  fontSize: 50,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Center(
+              child: Text("${snapshot.connectionState} occured"),
+            );
+          }
+          return Center(
+            child: Text("Server timed out!"),
+          );
+        },
+      ),
+    );
   }
 
   Widget boton() {
@@ -147,8 +123,6 @@ class _WeatherPageState extends State<lodeo> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-
-
         Text(
           'hola',
           style: TextStyle(),
@@ -159,7 +133,8 @@ class _WeatherPageState extends State<lodeo> {
                 child: Text('post'),
                 onPressed: () {
                   Future<void> fetchFiles1() async {
-                    String url = 'https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks';
+                    String url =
+                        'https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks';
                     var client = SpotifyOAuth2Client(
                         redirectUri: 'com.example.ui://callback',
                         customUriScheme: 'com.example.ui');
@@ -175,8 +150,10 @@ class _WeatherPageState extends State<lodeo> {
                       var headers = {
                         'Authorization': 'Bearer ${tknResp.accessToken}',
                       };
-                      var request = http.Request('GET', Uri.parse(
-                          'https://api.spotify.com/v1/browse/new-releases'));
+                      var request = http.Request(
+                          'GET',
+                          Uri.parse(
+                              'https://api.spotify.com/v1/browse/new-releases'));
 
                       request.headers.addAll(headers);
 
@@ -184,24 +161,23 @@ class _WeatherPageState extends State<lodeo> {
 
                       if (response.statusCode == 200) {
                         print(await response.stream.bytesToString());
-                      }
-                      else {
+                      } else {
                         print(response.reasonPhrase);
                       }
                     }
                   }
+
                   fetchFiles1();
                 }),
-
           ],
         ),
       ],
     );
   }
 
-
   Future fetchFiles1() async {
-    String url = 'https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks';
+    String url =
+        'https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks';
     var client = SpotifyOAuth2Client(
         redirectUri: 'com.example.ui://callback',
         customUriScheme: 'com.example.ui');
@@ -217,20 +193,23 @@ class _WeatherPageState extends State<lodeo> {
       var headers = {
         'Authorization': 'Bearer ${tknResp.accessToken}',
       };
-      var request = await http.Request('GET', Uri.parse(
-          'https://api.spotify.com/v1/browse/new-releases'));
+      var request = await http.Request(
+          'GET', Uri.parse('https://api.spotify.com/v1/browse/new-releases'));
 
       request.headers.addAll(headers);
 
-      http.StreamedResponse response = await request.send().timeout(
-          const Duration(seconds: 20));
+      http.StreamedResponse response =
+          await request.send().timeout(const Duration(seconds: 20));
 
       if (response.statusCode == 200) {
         print(await response.stream.bytesToString());
-      }
-      else {
+      } else {
         print(response.reasonPhrase);
       }
     }
+  }
+
+  Future<List<Item>> getData() async {
+    return await callttoappi().getatatodapi();
   }
 }
