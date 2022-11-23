@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:oauth2_client/authorization_response.dart';
 import 'package:oauth2_client/oauth2_client.dart';
@@ -7,6 +8,8 @@ import 'package:oauth2_client/oauth2_helper.dart';
 import 'package:oauth2_client/google_oauth2_client.dart';
 import 'package:oauth2_client/spotify_oauth2_client.dart';
 import 'package:ui/Models/calltoapi.dart';
+import 'package:ui/Models/playlistmodel.dart';
+import 'package:ui/Models/playlistmodel.dart';
 import 'package:ui/animations/oauth.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,6 +17,7 @@ import 'newapi.dart';
 import 'newmodel.dart';
 
 class lodeo extends StatelessWidget {
+  Track1? track1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +37,7 @@ class lodeo extends StatelessWidget {
               // if data has no errors
             } else if (snapshot.hasData) {
               // Extracting data from snapshot object
-              List<Item> data = snapshot.data as List<Item>;
+              List<Tracks1> data = snapshot.data as List<Tracks1>;
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 decoration: const BoxDecoration(
@@ -61,8 +65,7 @@ class lodeo extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Welcome ${data[2].artists[0].name}',
-
+                              'Welcome ${data[1].total}',
                               style: TextStyle(
                                   fontSize: 30,
                                   color: Colors.white,
@@ -71,19 +74,24 @@ class lodeo extends StatelessWidget {
                             Text(
                               //obtain the data from the api
                               //f,
-                                'Welcome ${data[2].name}',
+                              'Welcome ${data[2].total}',
                               style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              'Welcome ${data[2].artists[0].name}',
+                              'Welcome ${data[2].href}',
                               style: TextStyle(
                                   fontSize: 50,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
+                            IconButton(onPressed: (){
+                              final player = AudioPlayer();
+                              player.setSourceUrl('https://p.scdn.co/mp3-preview/91f0f5a4a20e185ed661e802d4d60d95dda26433?cid=b08838f65a5c4885bb0fbfe597c48b2a');
+                            }
+                                , icon: Icon(Icons.arrow_forward_ios))
                           ],
                         ),
                       ),
@@ -199,7 +207,7 @@ class lodeo extends StatelessWidget {
       request.headers.addAll(headers);
 
       http.StreamedResponse response =
-          await request.send().timeout(const Duration(seconds: 20));
+      await request.send().timeout(const Duration(seconds: 20));
 
       if (response.statusCode == 200) {
         print(await response.stream.bytesToString());
@@ -209,7 +217,7 @@ class lodeo extends StatelessWidget {
     }
   }
 
-  Future<List<Item>> getData() async {
+  Future<List<Tracks1>> getData() async {
     return await callttoappi().getatatodapi();
   }
 }
