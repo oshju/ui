@@ -37,7 +37,7 @@ class lodeo extends StatelessWidget {
               // if data has no errors
             } else if (snapshot.hasData) {
               // Extracting data from snapshot object
-              List<Tracks1> data = snapshot.data as List<Tracks1>;
+              List<dynamic> data = snapshot.data as List<dynamic>;
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 decoration: const BoxDecoration(
@@ -65,7 +65,7 @@ class lodeo extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Welcome ${data[1].total}',
+                              '${data[7]['track']['name'][14]}',
                               style: TextStyle(
                                   fontSize: 30,
                                   color: Colors.white,
@@ -74,22 +74,23 @@ class lodeo extends StatelessWidget {
                             Text(
                               //obtain the data from the api
                               //f,
-                              'Welcome ${data[2].total}',
+                              '${data[7]['track']['album']['name']}',
                               style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              'Welcome ${data[2].href}',
+                              'Welcome ${data[0]['picture']}',
                               style: TextStyle(
                                   fontSize: 50,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
-                            IconButton(onPressed: (){
+                            IconButton(onPressed: ()async{
                               final player = AudioPlayer();
-                              player.setSourceUrl('https://p.scdn.co/mp3-preview/91f0f5a4a20e185ed661e802d4d60d95dda26433?cid=b08838f65a5c4885bb0fbfe597c48b2a');
+                              String url=  player.setSourceUrl('${data[7]['track']['preview_url']}') as String;
+                              await AudioPlayer.play(url);
                             }
                                 , icon: Icon(Icons.arrow_forward_ios))
                           ],
@@ -217,7 +218,7 @@ class lodeo extends StatelessWidget {
     }
   }
 
-  Future<List<Tracks1>> getData() async {
+  Future<List<dynamic>> getData() async {
     return await callttoappi().getatatodapi();
   }
 }

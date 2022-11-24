@@ -9,7 +9,7 @@ import 'newmodel.dart';
 
 class callttoappi {
   //late callttoappi call;
-  Future<List<Tracks1>> getatatodapi() async {
+  Future<List<dynamic>> getatatodapi() async {
     String url =
         'https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks';
     var client = SpotifyOAuth2Client(
@@ -64,7 +64,8 @@ class callttoappi {
       print(userMap1[i]['track']['preview_url']);
     }
     //List<dynamic> userMap2 = userMap1['track']['preview_url'];
-    return userMap1.map((e) => Tracks1.fromJson(e)).toList();
+    //return userMap1.map((e) => Tracks1.fromJson(e)).toList();
+    return userMap1;
     if (response.statusCode == 200) {
       List<Item> userMap = jsonDecode(await response.stream.bytesToString());
       //Item user = Item.fromJson(userMap);
