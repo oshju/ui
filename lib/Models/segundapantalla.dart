@@ -89,8 +89,8 @@ class lodeo extends StatelessWidget {
                             ),
                             IconButton(onPressed: ()async{
                               final player = AudioPlayer();
-                              String url=  player.setSourceUrl('${data[7]['track']['preview_url']}') as String;
-                              await AudioPlayer.play(url);
+                              //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
+                              await player.play(DeviceFileSource('${data[7]['track']['preview_url']}'));
                             }
                                 , icon: Icon(Icons.arrow_forward_ios))
                           ],
