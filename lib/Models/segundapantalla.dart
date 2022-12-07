@@ -10,110 +10,196 @@ import 'package:oauth2_client/spotify_oauth2_client.dart';
 import 'package:ui/Models/calltoapi.dart';
 import 'package:ui/Models/playlistmodel.dart';
 import 'package:ui/Models/playlistmodel.dart';
+import 'package:ui/animations/cofee.dart';
 import 'package:ui/animations/oauth.dart';
 import 'package:http/http.dart' as http;
 
+import '../animations/sabado.dart';
 import 'newapi.dart';
 import 'newmodel.dart';
 
 class lodeo extends StatelessWidget {
   Track1? track1;
+  List<Track1>? lista;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: getData(),
-        builder: (ctx, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            // If error occured
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  '${snapshot.error.toString()} occurred',
-                  style: TextStyle(fontSize: 18),
-                ),
-              );
+      body: SafeArea(
+        child: Container(
+          child: Flex(
+            direction: Axis.vertical,
+            children: [
+              Expanded(
+                child: FutureBuilder(
+                  future: getData(),
+                  builder: (ctx, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      // If error occured
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            '${snapshot.error.toString()} occurred',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        );
 
-              // if data has no errors
-            } else if (snapshot.hasData) {
-              // Extracting data from snapshot object
-              List<dynamic> data = snapshot.data as List<dynamic>;
-              return Container(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment(0.8, 1),
-                    colors: <Color>[
-                      Color.fromARGB(255, 65, 89, 224),
-                      Color.fromARGB(255, 83, 92, 215),
-                      Color.fromARGB(255, 86, 88, 177),
-                      Color(0xfff39060),
-                      Color(0xffffb56b),
-                    ],
-                    tileMode: TileMode.mirror,
-                  ),
-                ),
-                width: double.infinity,
-                height: double.infinity,
-                child: SafeArea(
-                  child: Column(
-                    children: [
+                        // if data has no errors
+                      } else if (snapshot.hasData) {
+                        // Extracting data from snapshot object
+                        List<dynamic> data = snapshot.data as List<dynamic>;
+                        return Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 10),
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment(0.8, 1),
+                              colors: <Color>[
+                                Color.fromARGB(255, 65, 89, 224),
+                                Color.fromARGB(255, 83, 92, 215),
+                                Color.fromARGB(255, 86, 88, 177),
+                                Color(0xfff39060),
+                                Color(0xffffb56b),
+                              ],
+                              tileMode: TileMode.mirror,
+                            ),
+                          ),
+                          width: double.infinity,
+                          height: double.infinity,
 
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '${data[7]['track']['name'][14]}',
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              //obtain the data from the api
-                              //f,
-                              '${data[7]['track']['album']['name']}',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'Welcome ${data[0]['picture']}',
-                              style: TextStyle(
-                                  fontSize: 50,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            IconButton(onPressed: ()async{
-                              final player = AudioPlayer();
-                              //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
-                              await player.play(DeviceFileSource('${data[7]['track']['preview_url']}'));
-                            }
-                                , icon: Icon(Icons.arrow_forward_ios))
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+
+                                          Text(
+                                            '${data[7]['track']['name'][14]}',
+                                            style: TextStyle(
+                                                fontSize: 30,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            //obtain the data from the api
+                                            //f,
+                                            '${data[7]['track']['album']['name']}',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            'Welcome ${data[0]['picture']}',
+                                            style: TextStyle(
+                                                fontSize: 50,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          IconButton(
+                                              onPressed: () async {
+                                                final player = AudioPlayer();
+                                                //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
+                                                await player.play(DeviceFileSource(
+                                                    '${data[7]['track']['preview_url']}'));
+                                              },
+                                              icon: Icon(Icons.arrow_forward_ios)),
+                                          SingleChildScrollView(
+                                            child: Column(
+                                              children: [
+                                                ClipRRect(
+                                                    child: Text(
+                                                        '${data[7]['track']['album']['name']}',style: TextStyle(
+                                                        fontSize: 40,
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight.bold),)),
+                                                //lista de canciones en fuente blanco
+                                                for (var i = 0; i < 10; i++)
+                                                  ClipRRect(
+                                                      child: Text(
+                                                          '${data[i]['track']['name']}',style: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.white,
+                                                          fontWeight: FontWeight.bold),)),
+                                                Text(
+                                                  'Welcome ${data[3]['track']['album']['name']}',
+                                                  style: TextStyle(
+                                                      fontSize: 30,
+                                                      color: Colors.black38,
+                                                      fontWeight: FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  'Welcome ${data[3]['track']['album']['name']}',
+                                                  style: TextStyle(
+                                                      fontSize: 30,
+                                                      color: Colors.black38,
+                                                      fontWeight: FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  'Welcome ${data[3]['track']['album']['name']}',
+                                                  style: TextStyle(
+                                                      fontSize: 30,
+                                                      color: Colors.black38,
+                                                      fontWeight: FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  'Welcome ${data[3]['track']['album']['name']}',
+                                                  style: TextStyle(
+                                                      fontSize: 30,
+                                                      color: Colors.black38,
+                                                      fontWeight: FontWeight.bold),
+                                                ),
+                                                Row(
+                                                  children:[
+
+
+                                                  IconButton(
+                                                      onPressed: () async {
+                                                        final player = AudioPlayer();
+                                                        //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
+                                                        await player.play(DeviceFileSource(
+                                                            '${data[7]['track']['preview_url']}'));
+                                                      },
+                                                      icon: Icon(Icons.arrow_forward_ios)),
+                                                  IconButton(
+                                                      onPressed: () async {
+                                                        final player = AudioPlayer();
+                                                        //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
+                                                        await player.play(DeviceFileSource(
+                                                            '${data[7]['track']['preview_url']}'));
+                                                      },
+                                                      icon: Icon(Icons.arrow_forward_ios)),
+                    ]
+                                                )
+
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                        );
+                      }
+
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return Center(
+                        child: Text("${snapshot.connectionState} occured"),
+                      );
+                    }
+                    return Center(
+                      child: Text("Server timed out!"),
+                    );
+                  },
                 ),
-              );
-            }
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return Center(
-              child: Text("${snapshot.connectionState} occured"),
-            );
-          }
-          return Center(
-            child: Text("Server timed out!"),
-          );
-        },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -208,7 +294,7 @@ class lodeo extends StatelessWidget {
       request.headers.addAll(headers);
 
       http.StreamedResponse response =
-      await request.send().timeout(const Duration(seconds: 20));
+          await request.send().timeout(const Duration(seconds: 20));
 
       if (response.statusCode == 200) {
         print(await response.stream.bytesToString());
@@ -216,6 +302,21 @@ class lodeo extends StatelessWidget {
         print(response.reasonPhrase);
       }
     }
+  }
+
+  Widget _buildList() {
+    return Flexible(
+      child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: lista.toString().length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text('$lista[index].name'),
+              subtitle: Text('$lista[index].name'),
+              trailing: Text('$lista[index].name'),
+            );
+          }),
+    );
   }
 
   Future<List<dynamic>> getData() async {

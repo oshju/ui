@@ -91,7 +91,7 @@ class Item {
   final ExternalUrls? externalUrls;
   final String? href;
   final String? id;
-  final List<Image> images;
+  final List<Image2> images;
   final String? name;
   final DateTime? releaseDate;
   final String? releaseDatePrecision;
@@ -107,7 +107,7 @@ class Item {
       externalUrls: json["external_urls"] == null ? null : ExternalUrls.fromJson(json["external_urls"]),
       href: json["href"],
       id: json["id"],
-      images: json["images"] == null ? [] : List<Image>.from(json["images"]!.map((x) => Image.fromJson(x))),
+      images: json["images"] == null ? [] : List<Image2>.from(json["images"]!.map((x) => Image2.fromJson(x))),
       name: json["name"],
       releaseDate: json["release_date"] == null ? null : DateTime.parse(json["release_date"]),
       releaseDatePrecision: json["release_date_precision"],
@@ -124,7 +124,7 @@ class Item {
     "external_urls": externalUrls?.toJson(),
     "href": href,
     "id": id,
-    "images": List<Image>.from(images.map((x) => x.toJson())),
+    "images": List<Image2>.from(images.map((x) => x.toJson())),
     "name": name,
     //"release_date": "${releaseDate.year.toString().padLeft(4'0')}-${releaseDate.month.toString().padLeft(2'0')}-${releaseDate.day.toString().padLeft(2'0')}",
     "release_date_precision": releaseDatePrecision,
@@ -205,8 +205,8 @@ class ExternalUrls {
   }
 }
 
-class Image {
-  Image({
+class Image2 {
+  Image2({
     required this.height,
     required this.url,
     required this.width,
@@ -216,8 +216,8 @@ class Image {
   final String? url;
   final int? width;
 
-  factory Image.fromJson(Map<String, dynamic> json){
-    return Image(
+  factory Image2.fromJson(Map<String, dynamic> json){
+    return Image2(
       height: json["height"],
       url: json["url"],
       width: json["width"],

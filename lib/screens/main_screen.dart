@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:js/js.dart';
 import 'package:ui/Models/jobcarrusel.dart';
+import 'package:ui/Models/segundapantalla.dart';
 import 'package:ui/animations/animatedcontainer.dart';
 import 'package:ui/screens/Splashscreen.dart';
 import 'package:ui/screens/apiprueba.dart';
@@ -163,6 +164,63 @@ class main_screen extends StatelessWidget{
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: joblist(forYouJobs),
+
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            FlatButton(
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => lodeo()),
+                );
+              },
+              child: Text(
+                'see more',
+                style: TextStyle(fontFamily: 'Poppin',color: Colors.purple,fontSize: 15.0,fontWeight: FontWeight.bold),
+              ),
+
+            ),
+          ],
+        ),
+        Column(
+          children: <Widget>[
+            Text(
+              'you might also like',
+              style: TextStyle(fontFamily: 'Poppin',color: Colors.grey,fontSize: 30.0,fontWeight: FontWeight.bold),
+            ),
+            jobcarrusel(),
+            textfooter(context),
+            //textfooter1(context),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: joblist(forYouJobs),
+
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                FlatButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => lodeo()),
+                    );
+                  },
+                  child: Text(
+                    'see more',
+                    style: TextStyle(fontFamily: 'Poppin',color: Colors.purple,fontSize: 15.0,fontWeight: FontWeight.bold),
+                  ),
+
+
+                ),
+              ],
+            ),
+            ListView(
+
+              ),
+          ],
         ),
       ],
     );
@@ -188,7 +246,7 @@ class main_screen extends StatelessWidget{
     );
   }
 
-
+lodeo? segunda;
 }
 
 
