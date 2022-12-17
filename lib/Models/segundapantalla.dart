@@ -13,6 +13,7 @@ import 'package:ui/Models/playlistmodel.dart';
 import 'package:ui/animations/cofee.dart';
 import 'package:ui/animations/oauth.dart';
 import 'package:http/http.dart' as http;
+import 'package:ui/animations/reactnative.dart';
 
 import '../animations/sabado.dart';
 import 'newapi.dart';
@@ -70,190 +71,257 @@ class lodeo extends StatelessWidget {
                           height: double.infinity,
                           child: SingleChildScrollView(
                             child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  '${data[7]['track']['name'][14]}',
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  //obtain the data from the api
-                                  //f,
-                                  '${data[7]['track']['album']['name']}',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  'Welcome ${data[0]['picture']}',
-                                  style: TextStyle(
-                                      fontSize: 50,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                IconButton(
-                                    onPressed: () async {
-                                      final player = AudioPlayer();
-                                      //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
-                                      await player.play(DeviceFileSource(
-                                          '${data[1]['track']['album']['preview_url']}'));
-                                    },
-                                    icon: Icon(Icons.arrow_forward_ios)),
-                                SingleChildScrollView(
-                                  child: Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      height: 1000,
-                                      child: Expanded(
-                                      child:Column(
-                                        children: [
-                                          Text(
-                                            '${data[7]['track']['album']['name']}',
-                                            style: TextStyle(
-                                                fontSize: 40,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-
-                                          //lista de canciones en fuente blanco
-                                            ClipRRect(
-                                                child: Text(
-                                              '${data[3]['track']['name']}',
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                          Text(
-                                            'Welcome ${data[3]['track']['album']['name']}',
-                                            style: TextStyle(
-                                                fontSize: 30,
-                                                color: Colors.black38,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            'Welcome ${data[3]['track']['album']['name']}',
-                                            style: TextStyle(
-                                                fontSize: 30,
-                                                color: Colors.black38,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            'Welcome ${data[3]['track']['album']['name']}',
-                                            style: TextStyle(
-                                                fontSize: 30,
-                                                color: Colors.black38,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            'Welcome ${data[3]['track']['album']['name']}',
-                                            style: TextStyle(
-                                                fontSize: 30,
-                                                color: Colors.black38,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(18.0),
-                                              child: IconButton(
-                                                  onPressed: () async {
-                                                    final player =
-                                                        AudioPlayer();
-                                                    //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
-                                                    await player.play(
-                                                        DeviceFileSource(
-                                                            '${data[7]['track']['preview_url']}'));
-                                                  },
-                                                  icon: Icon(
-                                                      Icons.arrow_forward_ios)),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(18.0),
-                                              child: IconButton(
-                                                  onPressed: () async {
-                                                    final player =
-                                                        AudioPlayer();
-                                                    //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
-                                                    await player.play(
-                                                        DeviceFileSource(
-                                                            '${data[7]['track']['preview_url']}'));
-                                                  },
-                                                  icon: Icon(
-                                                      Icons.palette_outlined)),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(18.0),
-                                              child: IconButton(
-                                                  onPressed: () async {
-                                                    final player =
-                                                        AudioPlayer();
-                                                    //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
-                                                    await player.play(
-                                                        DeviceFileSource(
-                                                            '${data[7]['track']['preview_url']}'));
-                                                  },
-                                                  icon: const Icon(
-                                                      Icons.play_circle)),
-                                            )
-                                          ]),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                              child: ListView.builder(
-                                                shrinkWrap: true,
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemCount: data.length,
-                                                itemBuilder: (context, index) {
-                                                  return ClipRRect(
-                                                    child: Card(
-                                                      child: Image.network(
-                                                        '${data[index]['track']['album']['images'][0]['url']}',
-                                                      ),
-                                                      //String url=  player.setSourceUrl('${data[7]['track']['album']['
-                                                    ),
-                                                  );
-                                                },
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Text(
+                                    '${data[7]['track']['name'][14]}',
+                                    style: TextStyle(
+                                        fontSize: 30,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    //obtain the data from the api
+                                    //f,
+                                    '${data[7]['track']['album']['name']}',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    'Welcome ${data[0]['picture']}',
+                                    style: TextStyle(
+                                        fontSize: 50,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  IconButton(
+                                      onPressed: () async {
+                                        final player = AudioPlayer();
+                                        //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
+                                        await player.play(DeviceFileSource(
+                                            '${data[1]['track']['album']['preview_url']}'));
+                                      },
+                                      icon: Icon(Icons.arrow_forward_ios)),
+                                  SingleChildScrollView(
+                                    child: Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        height: 1000,
+                                        child: Expanded(
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                '${data[7]['track']['album']['name']}',
+                                                style: TextStyle(
+                                                    fontSize: 40,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                              child: Container(
-                                                child: ListView.builder(
-                                                  shrinkWrap: true,
-                                                  scrollDirection:
-                                                  Axis.horizontal,
-                                                  itemCount: data.length,
-                                                  itemBuilder: (context, index) {
-                                                    return ClipRRect(
-                                                      child: Card(
-                                                        child: Image.network(
-                                                          '${data[index]['track']['album']['images'][0]['url']}',
+
+                                              //lista de canciones en fuente blanco
+                                              ClipRRect(
+                                                  child: Text(
+                                                '${data[3]['track']['name']}',
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              Text(
+                                                'Welcome ${data[3]['track']['album']['name']}',
+                                                style: TextStyle(
+                                                    fontSize: 30,
+                                                    color: Colors.black38,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Text(
+                                                'Welcome ${data[3]['track']['album']['name']}',
+                                                style: TextStyle(
+                                                    fontSize: 30,
+                                                    color: Colors.black38,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Text(
+                                                'Welcome ${data[3]['track']['album']['name']}',
+                                                style: TextStyle(
+                                                    fontSize: 30,
+                                                    color: Colors.black38,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Text(
+                                                'Welcome ${data[3]['track']['album']['name']}',
+                                                style: TextStyle(
+                                                    fontSize: 30,
+                                                    color: Colors.black38,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Row(children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      18.0),
+                                                  child: IconButton(
+                                                      onPressed: () async {
+                                                        final player =
+                                                            AudioPlayer();
+                                                        //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
+                                                        await player.play(
+                                                            DeviceFileSource(
+                                                                '${data[7]['track']['preview_url']}'));
+                                                      },
+                                                      icon: Icon(Icons
+                                                          .arrow_forward_ios)),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      18.0),
+                                                  child: IconButton(
+                                                      onPressed: () async {
+                                                        final player =
+                                                            AudioPlayer();
+                                                        //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
+                                                        await player.play(
+                                                            DeviceFileSource(
+                                                                '${data[7]['track']['preview_url']}'));
+                                                      },
+                                                      icon: Icon(Icons
+                                                          .palette_outlined)),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      18.0),
+                                                  child: IconButton(
+                                                      onPressed: () async {
+                                                        final player =
+                                                            AudioPlayer();
+                                                        //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
+                                                        await player.play(
+                                                            DeviceFileSource(
+                                                                '${data[7]['track']['preview_url']}'));
+                                                      },
+                                                      icon: const Icon(
+                                                          Icons.play_circle)),
+                                                )
+                                              ]),
+
+                                              Expanded(
+                                                flex: 2,
+                                                child: Container(
+                                                  child: ListView.builder(
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    itemCount: data.length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return ClipRRect(
+                                                        child: Card(
+                                                          child: Image.network(
+                                                            '${data[index]['track']['album']['images'][0]['url']}',
+                                                          ),
                                                         ),
-                                                        //String url=  player.setSourceUrl('${data[7]['track']['album']['
-                                                      ),
-                                                    );
-                                                  },
+                                                      );
+                                                    },
+                                                  ),
                                                 ),
                                               ),
+                                              Padding(
+                                                  padding: EdgeInsets.all(10)),
+                                              Text('new releases',
+                                                  style: TextStyle(
+                                                      fontSize: 30,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              Expanded(
+                                                flex: 2,
+                                                      //capture the index of the item listview
 
+                                                    child: Container(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: ListView.builder(
+
+                                                          shrinkWrap: true,
+                                                          scrollDirection:
+                                                              Axis.horizontal,
+                                                          itemCount:
+                                                              data.length,
+                                                          itemBuilder:
+                                                              (context, index) {
+
+                                                            return InkWell(
+
+                                                                onTap: () {
+                                                                  print(
+                                                                      'pulsado Container');
+                                                                  //capture the index of the item listview
+
+                                                                  final player =
+                                                                  AudioPlayer();
+                                                                  //String url=  player.setSourceUrl('${data[7]['track']['album']['preview_url']}')as String;
+                                                                  player.play(DeviceFileSource(
+                                                                      '${data[index]['track']['preview_url']}'));
+                                                                },
+
+                                                              child: Card(
+                                                                child: Image
+                                                                    .network(
+                                                                  '${data[index]['track']['album']['images'][0]['url']}',
+                                                                ),
+                                                                //String url=  player.setSourceUrl('${data[7]['track']['album']['
+                                                              ),
+                                                            );
+
+                                                          },
+
+                                                        ),
+                                                      ),
+
+                                                    ),
+                                                    ),
+
+                                              Expanded(
+                                                flex: 2,
+
+                                                    child: Wrap(
+
+                                                      children:List.generate(3, (index){
+                                                        return InkWell(
+                                                          onTap: (){
+                                                            print(index);
+                                                          },
+                                                          child:ElevatedButton(
+                                                          child: Text("Button"),
+                                                          onPressed:() {
+                                                            print(index);
+
+                                                          },
+
+
+
+                                                        ));
+                                                      }
+
+                                                    )),
+                                              ),
+                                            ],
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                            ),
-                          ]),
-                        ),
+                                ]),
+                          ),
                         );
                       }
                     } else if (snapshot.connectionState ==
